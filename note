@@ -4,5 +4,4 @@
 
 mkdir frontend
 cd frontend
-touch index.html app.js
-npm init
+npm init -y

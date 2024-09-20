@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Summary</title>
+    <script src="/js/app.js" defer></script>
+</head>
+<body>
+
+    <h1>Your Order Summary</h1>
+    <div id="order-items">
+        <!-- Order items will be listed here dynamically -->
+    </div>
+
+    <button onclick="checkout()">Checkout</button>
+
+    <!-- Order success message -->
+    <section id="order-success" style="display: none;">
+        <h2>Order Successful!</h2>
+        <p>Your order has been placed successfully. Order Number: <span id="order-number"></span></p>
+    </section>
+
+</body>
+</html>

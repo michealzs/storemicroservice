@@ -26,6 +26,41 @@ from .models import ProductReview, Product, PopularProduct, CartItem, Order, Sub
 from .serializers import ProductReviewSerializer, PopularProductSerializer, ProductSerializer, SubcategorySerializer, OrderSerializer, UserProfileSerializer, UpdateUserProfileSerializer
 
 # Other specific imports based on microservice usage
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import Category
+
+
+@api_view(['GET'])
+def navbar_data(request):
+    # Fetch categories from the Category model
+    categories = [
+        {
+            "name": category.name,
+            "slug": category.slug,
+            "url": f"/category/{category.slug}/"
+        }
+        for category in Category.objects.all()
+    ]
+
+    # Cart item count (you may need to replace this with the actual logic for fetching cart item count)
+    cart_item_count = 0  # Placeholder logic for cart item count
+
+    # User authentication data
+    user_data = {
+        "is_authenticated": request.user.is_authenticated,
+        "profile_url": "/store/profile" if request.user.is_authenticated else None,
+        "logout_url": "/store/logout" if request.user.is_authenticated else None,
+        "login_url": "/store/login" if not request.user.is_authenticated else None,
+        "signup_url": "/store/signup" if not request.user.is_authenticated else None,
+    }
+
+    # Return the data as JSON
+    return Response({
+        "categories": categories,
+        "cart_item_count": cart_item_count,
+        "user_data": user_data,
+    })
 
 
 class SessionView(APIView):

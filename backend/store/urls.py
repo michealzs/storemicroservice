@@ -7,7 +7,7 @@ from .views import (
     ForgotPasswordView, OrderSuccessView, cart, google_base, robots_txt
     UserProfileView, SignupView, LogoutView, UserProfileUpdateView,
     PasswordChangeView, ForgotPasswordView, ConfirmThePasswordResetView,
-    OrderHistoryView, SearchResultsView,
+    OrderHistoryView, SearchResultsView, navbar_data
 )
 
 app_name = 'store'
@@ -25,6 +25,7 @@ router.register(r'profile', UserProfileViewSet, basename='profile')
 # Add the remaining URLs outside the router
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),  # Home view
+    path('api/navbar/', navbar_data, name='navbar-data'),
     path('search/', SearchResultsView.as_view(), name='search'),  # Search functionality
     path('login/', UserProfileLoginView.as_view(), name='login'),  # Login view
     path('logout/', Logout.as_view(), name='logout'),  # Logout view

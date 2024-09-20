@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store</title>
+    <script src="app.js" defer></script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <nav>
+            <ul id="category-list">
+                <!-- Categories and subcategories will be loaded here dynamically -->
+            </ul>
+        </nav>
+
+        <div>
+            Cart: <span id="cart-count">0</span>
+        </div>
+    </header>
+
+    <!-- Product Search -->
+    <section id="product-search">
+        <input type="text" id="search-query" placeholder="Search products">
+        <button onclick="searchProducts()">Search</button>
+        <div id="search-results">
+            <!-- Search results will be listed here -->
+        </div>
+    </section>
+
+    <!-- Product Listing -->
+    <main>
+        <h1>Products</h1>
+        <div id="product-list">
+            <!-- Products will be listed here dynamically -->
+        </div>
+    </main>
+
+    <!-- Order Summary -->
+    <section id="order-summary">
+        <h2>Your Order Summary</h2>
+        <div id="order-items">
+            <!-- Order items will be listed here dynamically -->
+        </div>
+        <button onclick="checkout()">Checkout</button>
+    </section>
+
+    <!-- Order Success -->
+    <section id="order-success" style="display: none;">
+        <h2>Order Successful!</h2>
+        <p>Your order has been placed successfully. Order Number: <span id="order-number"></span></p>
+    </section>
+
+    <!-- Order History -->
+    <section id="order-history">
+        <h2>Order History</h2>
+        <div id="order-list">
+            <!-- Orders will be displayed here -->
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section>
+        <h2>Product Reviews</h2>
+        <div id="reviews-list">
+            <!-- Reviews will be loaded here dynamically -->
+        </div>
+    </section>
+
+</body>
+</html>

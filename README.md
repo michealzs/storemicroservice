@@ -49,7 +49,7 @@ that answers shopper questions over the live catalog.
 ## Run it
 
 ```bash
-cp .env.example .env          # optionally add OPENAI_API_KEY / STRIPE_SECRET_KEY
+cp .env.example .env          # optionally add DEEPSEEK_API_KEY / STRIPE_SECRET_KEY
 docker compose up -d --build
 docker compose exec app python -m scripts.seed
 curl -X POST localhost:8000/ingest
@@ -63,8 +63,7 @@ Local dev: `make install && make test && make run`.
 
 Runs end-to-end with no secrets: catalog/cart/checkout/reviews work as-is;
 embeddings and the vector store fall back to offline implementations, and
-`/chat` returns ranked catalog matches. Add `OPENAI_API_KEY` (or
-`ANTHROPIC_API_KEY`) for conversational answers, `STRIPE_SECRET_KEY` for real
+`/chat` returns ranked catalog matches. Add `DEEPSEEK_API_KEY` (or `OPENAI_API_KEY` / `ANTHROPIC_API_KEY`) for conversational answers, `STRIPE_SECRET_KEY` for real
 payments, and Langfuse/LangSmith keys for tracing.
 
 ## Terraform

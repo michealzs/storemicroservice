@@ -37,6 +37,13 @@ class CommerceAgent:
         return create_react_agent(self._llm(), build_tools())
 
     def _llm(self):
+        if self.settings.llm_provider == "deepseek":
+            from langchain_deepseek import ChatDeepSeek
+
+            return ChatDeepSeek(
+                model=self.settings.chat_model,
+                api_key=self.settings.deepseek_api_key,
+            )
         if self.settings.llm_provider == "anthropic":
             from langchain_anthropic import ChatAnthropic
 
@@ -73,7 +80,7 @@ class CommerceAgent:
         sources = [h["metadata"].get("slug", "") for h in hits]
         lines = [
             "LLM provider not configured — returning catalog matches. "
-            "Set OPENAI_API_KEY (or ANTHROPIC_API_KEY) for conversational recommendations."
+            "Set DEEPSEEK_API_KEY (or OPENAI_API_KEY/ANTHROPIC_API_KEY) for conversational recommendations."
         ]
         if hits:
             lines.append("Top matches:")

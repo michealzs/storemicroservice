@@ -1,6 +1,6 @@
 """Embedding provider with a deterministic offline fallback.
 
-When ``OPENAI_API_KEY`` is configured we use real OpenAI embeddings. Otherwise
+When ``OPENAI_API_KEY`` is configured we use real OpenAI embeddings (DeepSeek has no embeddings API). Otherwise
 we fall back to a deterministic hash-based embedding so the service (and the
 test suite) runs end-to-end with zero secrets. The fallback is *not* good for
 real semantic search, but keeps every code path exercised.
@@ -46,7 +46,7 @@ def get_embeddings(settings: Settings | None = None):
     if _cached_embeddings is not None:
         return _cached_embeddings
     settings = settings or get_settings()
-    if settings.llm_provider == "openai" and settings.openai_api_key:
+    if settings.openai_api_key:
         try:
             from langchain_openai import OpenAIEmbeddings
 

@@ -29,13 +29,15 @@ class Settings(BaseSettings):
     )
 
     # --- LLM provider ---
-    # Provider for chat + embeddings. "openai" is the default; "anthropic" is
-    # supported for chat. Missing keys degrade gracefully (see embeddings.py /
-    # agents/graph.py) so the service still boots and non-LLM routes work.
-    llm_provider: Literal["openai", "anthropic"] = "openai"
+    # Chat/agent provider. "deepseek" is the default ("openai"/"anthropic"
+    # also supported). DeepSeek has no embeddings API, so embeddings use
+    # OpenAI when OPENAI_API_KEY is set (else an offline fallback). Missing
+    # keys degrade gracefully so the service still boots and non-LLM routes work.
+    llm_provider: Literal["deepseek", "openai", "anthropic"] = "deepseek"
+    deepseek_api_key: str | None = None
     openai_api_key: str | None = None
     anthropic_api_key: str | None = None
-    chat_model: str = "gpt-4o-mini"
+    chat_model: str = "deepseek-chat"
     embedding_model: str = "text-embedding-3-small"
     embedding_dimensions: int = 1536
 
@@ -71,6 +73,8 @@ class Settings(BaseSettings):
 
     @property
     def llm_configured(self) -> bool:
+        if self.llm_provider == "deepseek":
+            return bool(self.deepseek_api_key)
         if self.llm_provider == "openai":
             return bool(self.openai_api_key)
         return bool(self.anthropic_api_key)
